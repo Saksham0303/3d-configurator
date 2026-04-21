@@ -80,3 +80,147 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .shine-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  .shine-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0) 42%),
+      radial-gradient(circle at top, rgba(255, 255, 255, 0.26), transparent 55%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .shine-card::after {
+    content: '';
+    position: absolute;
+    top: -140%;
+    left: -180%;
+    width: 120%;
+    height: 340%;
+    transform: rotate(22deg);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 22%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.08) 78%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition:
+      left 480ms ease,
+      opacity 220ms ease;
+    pointer-events: none;
+    z-index: 0;
+    animation: auto-card-shine 1s linear infinite;
+  }
+
+  .shine-card:hover::before,
+  .shine-card:focus-visible::before,
+  .shine-card[data-active='true']::before {
+    opacity: 1;
+  }
+
+  .shine-card:hover::after,
+  .shine-card:focus-visible::after,
+  .shine-card[data-active='true']::after {
+    left: 120%;
+    opacity: 1;
+  }
+
+  .shine-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .auto-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .auto-shine::after {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -210%;
+    width: 90%;
+    height: 380%;
+    transform: rotate(20deg);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 20%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%
+    );
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    animation: auto-button-shine 1s linear infinite;
+  }
+
+  .auto-shine > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes auto-button-shine {
+  0% {
+    left: -210%;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.95;
+  }
+
+  56% {
+    left: 135%;
+    opacity: 0.95;
+  }
+
+  100% {
+    left: 135%;
+    opacity: 0;
+  }
+}
+
+@keyframes auto-card-shine {
+  0% {
+    left: -180%;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.9;
+  }
+
+  56% {
+    left: 120%;
+    opacity: 0.9;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}

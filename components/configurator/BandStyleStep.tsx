@@ -1,13 +1,8 @@
 'use client';
 
+import { BAND_STYLE_OPTIONS } from '@/lib/configurator';
 import { useConfiguratorStore, BandStyle } from '@/lib/store';
 import { cn } from '@/lib/utils';
-
-const styles: { value: BandStyle; label: string; description: string }[] = [
-  { value: 'thin', label: 'Thin', description: 'Delicate and refined' },
-  { value: 'classic', label: 'Classic', description: 'Timeless elegance' },
-  { value: 'wide', label: 'Wide', description: 'Bold and modern' },
-];
 
 export function BandStyleStep() {
   const { bandStyle, setBandStyle, setStep } = useConfiguratorStore();
@@ -20,17 +15,20 @@ export function BandStyleStep() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-3xl font-light mb-2">Select Your Band Style</h2>
-        <p className="text-neutral-600">Choose the perfect width</p>
+        <h2 className="mb-2 text-2xl font-light sm:text-3xl">Select Your Band Style</h2>
+        <p className="text-sm text-neutral-600 sm:text-base">Choose the perfect width</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-        {styles.map((style) => (
+      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+        {BAND_STYLE_OPTIONS.map((style) => (
           <button
             key={style.value}
             onClick={() => handleSelect(style.value)}
+            aria-pressed={bandStyle === style.value}
+            aria-label={`${style.label} band style`}
+            data-active={bandStyle === style.value}
             className={cn(
-              'p-8 border-2 rounded-lg transition-all hover:border-neutral-900 hover:shadow-lg',
+              'auto-shine shine-card rounded-lg border-2 p-6 transition-all hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-lg sm:p-8',
               bandStyle === style.value
                 ? 'border-neutral-900 bg-neutral-50'
                 : 'border-neutral-200'
@@ -46,7 +44,7 @@ export function BandStyleStep() {
                 )}
               />
             </div>
-            <h3 className="text-xl font-medium mb-2">{style.label}</h3>
+            <h3 className="mb-2 text-lg font-medium sm:text-xl">{style.label}</h3>
             <p className="text-sm text-neutral-600">{style.description}</p>
           </button>
         ))}

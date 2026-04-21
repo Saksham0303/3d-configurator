@@ -1,20 +1,18 @@
 'use client';
 
+import { estimateRingPrice, formatPrice, METAL_LABELS } from '@/lib/configurator';
 import { useConfiguratorStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 export function Summary() {
   const { diamondShape, bandStyle, metal, ringSize, reset } = useConfiguratorStore();
   const [saving, setSaving] = useState(false);
-
-  const metalLabels = {
-    'gold': 'Yellow Gold',
-    'white-gold': 'White Gold',
-    'rose-gold': 'Rose Gold',
-    'platinum': 'Platinum',
-  };
+  const estimatedPrice = useMemo(
+    () => estimateRingPrice({ diamondShape, bandStyle, metal, ringSize }),
+    [diamondShape, bandStyle, metal, ringSize]
+  );
 
   const handleSave = async () => {
     setSaving(true);
@@ -26,24 +24,32 @@ export function Summary() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-3xl font-light mb-2">Your Custom Ring</h2>
-        <p className="text-neutral-600">Review your selections</p>
+        <h2 className="mb-2 text-2xl font-light sm:text-3xl">Your Custom Ring</h2>
+        <p className="text-sm text-neutral-600 sm:text-base">Review your selections</p>
       </div>
 
-      <div className="max-w-md mx-auto bg-white border border-neutral-200 rounded-lg p-8 space-y-4">
-        <div className="flex justify-between py-3 border-b border-neutral-100">
+      <div className="shine-card mx-auto max-w-md space-y-4 rounded-lg border border-neutral-200 bg-white p-5 shadow-sm sm:p-8">
+        <div className="shine-card rounded-xl bg-neutral-950 px-4 py-4 text-white">
+          <p className="text-xs uppercase tracking-[0.22em] text-neutral-300">Estimated Price</p>
+          <p className="mt-2 text-3xl font-light">{formatPrice(estimatedPrice)}</p>
+          <p className="mt-2 text-sm text-neutral-300">
+            Final pricing may vary slightly based on stone grading and finishing.
+          </p>
+        </div>
+
+        <div className="flex items-start justify-between gap-4 border-b border-neutral-100 py-3 text-sm sm:text-base">
           <span className="text-neutral-600">Diamond Shape</span>
           <span className="font-medium capitalize">{diamondShape}</span>
         </div>
-        <div className="flex justify-between py-3 border-b border-neutral-100">
+        <div className="flex items-start justify-between gap-4 border-b border-neutral-100 py-3 text-sm sm:text-base">
           <span className="text-neutral-600">Band Style</span>
           <span className="font-medium capitalize">{bandStyle}</span>
         </div>
-        <div className="flex justify-between py-3 border-b border-neutral-100">
+        <div className="flex items-start justify-between gap-4 border-b border-neutral-100 py-3 text-sm sm:text-base">
           <span className="text-neutral-600">Metal</span>
-          <span className="font-medium">{metalLabels[metal]}</span>
+          <span className="font-medium">{METAL_LABELS[metal]}</span>
         </div>
-        <div className="flex justify-between py-3">
+        <div className="flex items-start justify-between gap-4 py-3 text-sm sm:text-base">
           <span className="text-neutral-600">Ring Size</span>
           <span className="font-medium">{ringSize}</span>
         </div>

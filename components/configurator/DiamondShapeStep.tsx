@@ -1,14 +1,15 @@
 'use client';
 
+import { Diamond, Square, Circle } from 'lucide-react';
+import { DIAMOND_SHAPE_OPTIONS } from '@/lib/configurator';
 import { useConfiguratorStore, DiamondShape } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import { Diamond, Square, Circle } from 'lucide-react';
 
-const shapes: { value: DiamondShape; label: string; icon: any }[] = [
-  { value: 'round', label: 'Round', icon: Circle },
-  { value: 'princess', label: 'Princess', icon: Square },
-  { value: 'oval', label: 'Oval', icon: Diamond },
-];
+const shapeIcons: Record<DiamondShape, typeof Circle> = {
+  round: Circle,
+  princess: Square,
+  oval: Diamond,
+};
 
 export function DiamondShapeStep() {
   const { diamondShape, setDiamondShape, setStep } = useConfiguratorStore();
@@ -21,31 +22,30 @@ export function DiamondShapeStep() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-3xl font-light mb-2">Choose Your Diamond Shape</h2>
-        <p className="text-neutral-600">Select the cut that speaks to you</p>
+        <h2 className="mb-2 text-2xl font-light sm:text-3xl">Choose Your Diamond Shape</h2>
+        <p className="text-sm text-neutral-600 sm:text-base">Select the cut that speaks to you</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-        {shapes.map((shape) => {
-          const Icon = shape.icon;
+      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+        {DIAMOND_SHAPE_OPTIONS.map((shape) => {
+          const Icon = shapeIcons[shape.value];
           return (
             <button
               key={shape.value}
               onClick={() => handleSelect(shape.value)}
+              aria-pressed={diamondShape === shape.value}
+              aria-label={`${shape.label} diamond shape`}
+              data-active={diamondShape === shape.value}
               className={cn(
-                'p-8 border-2 rounded-lg transition-all hover:border-neutral-900 hover:shadow-lg',
+                'auto-shine shine-card rounded-lg border-2 p-6 transition-all hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-lg sm:p-8',
                 diamondShape === shape.value
                   ? 'border-neutral-900 bg-neutral-50'
                   : 'border-neutral-200'
               )}
             >
-              <Icon className="w-12 h-12 mx-auto mb-4" />
-              <h3 className="text-xl font-medium mb-2">{shape.label}</h3>
-              <p className="text-sm text-neutral-600">
-                {shape.value === 'round' && 'Classic and timeless'}
-                {shape.value === 'princess' && 'Modern and geometric'}
-                {shape.value === 'oval' && 'Elegant and elongated'}
-              </p>
+              <Icon className="mx-auto mb-4 h-10 w-10 sm:h-12 sm:w-12" />
+              <h3 className="mb-2 text-lg font-medium sm:text-xl">{shape.label}</h3>
+              <p className="text-sm text-neutral-600">{shape.description}</p>
             </button>
           );
         })}

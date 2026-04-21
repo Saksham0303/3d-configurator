@@ -3,8 +3,8 @@ import { persist } from 'zustand/middleware';
 
 export type DiamondShape = 'round' | 'princess' | 'oval';
 export type MetalType = 'gold' | 'white-gold' | 'rose-gold' | 'platinum';
-export type BandStyle = 'classic' | 'thin' | 'wide' | 'twisted' | 'split' | 'pave' | 'cathedral' | 'infinity';
-export type HeadStyle = 'classic' | 'halo' | 'double-halo' | 'bezel' | 'tiffany' | 'cathedral' | 'three-stone' | 'vintage';
+export type BandStyle = 'classic' | 'thin' | 'wide';
+export type HeadStyle = 'classic';
 
 interface ConfiguratorState {
   step: number;
