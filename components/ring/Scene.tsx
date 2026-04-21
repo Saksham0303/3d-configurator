@@ -20,7 +20,7 @@ export function Scene() {
   }, []);
 
   const cameraPosition = useMemo<[number, number, number]>(
-    () => (isMobile ? [2.2, 1.7, 4.6] : [2.5, 1.8, 3.5]),
+    () => (isMobile ? [2.15, 1.4, 3.95] : [2.5, 1.8, 3.5]),
     [isMobile]
   );
 
@@ -30,7 +30,7 @@ export function Scene() {
         shadows
         camera={{
           position: cameraPosition,
-          fov: isMobile ? 42 : 35,
+          fov: isMobile ? 34 : 35,
           near: 0.1,
           far: 1000,
         }}
@@ -60,20 +60,22 @@ export function Scene() {
             penumbra={1}
           />
 
-          <Ring />
+          <group scale={isMobile ? 1 : 1}>
+            <Ring />
+          </group>
 
           <OrbitControls
             enablePan={false}
             enableZoom={true}
-            minDistance={isMobile ? 3.4 : 3}
-            maxDistance={isMobile ? 7 : 8}
+            minDistance={isMobile ? 3.2 : 3}
+            maxDistance={isMobile ? 4.8 : 8}
             maxPolarAngle={isMobile ? Math.PI / 1.9 : Math.PI / 2}
             minPolarAngle={isMobile ? Math.PI / 8 : Math.PI / 12}
             rotateSpeed={isMobile ? 0.75 : 1}
             zoomSpeed={isMobile ? 0.85 : 1}
             autoRotate={!isInteracting}
             autoRotateSpeed={isMobile ? 0.65 : 0.5}
-            target={[0, 0.55, 0]}
+            target={isMobile ? [0, 0.25, 0] : [0, 0.55, 0]}
             onStart={() => setIsInteracting(true)}
             onEnd={() => setIsInteracting(false)}
           />

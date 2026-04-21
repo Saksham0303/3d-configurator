@@ -63,10 +63,10 @@ export default function Home() {
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <header className="relative z-10 border-b border-neutral-200/50 bg-white/80 px-4 py-4 shadow-sm backdrop-blur-xl sm:px-6 sm:py-5 lg:px-8 lg:py-6">
-          <div className="mx-auto flex max-w-screen-2xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900 shadow-lg">
+        <header className="relative z-10 border-b border-neutral-200/50 bg-white/80 px-4 py-3 shadow-sm backdrop-blur-xl sm:px-6 sm:py-5 lg:px-8 lg:py-6">
+          <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-3">
+            <div className="min-w-0 flex items-center gap-3">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900 shadow-lg sm:h-12 sm:w-12">
                 <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -76,14 +76,16 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <div>
-                <h1 className="text-xl font-light tracking-wider text-neutral-900 sm:text-2xl">
+              <div className="min-w-0">
+                <h1 className="truncate text-lg font-light tracking-wide text-neutral-900 sm:text-2xl sm:tracking-wider">
                   Eternal{' '}
                   <span className="bg-gradient-to-r from-neutral-700 to-neutral-900 bg-clip-text font-semibold text-transparent">
                     Rings
                   </span>
                 </h1>
-                <p className="text-xs tracking-wide text-neutral-500">Design Your Perfect Moment</p>
+                <p className="truncate text-[11px] tracking-[0.18em] text-neutral-500 sm:text-xs sm:tracking-wide">
+                  Design Your Perfect Moment
+                </p>
               </div>
             </div>
 
@@ -104,7 +106,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="md:hidden"
+                  className="h-11 w-11 shrink-0 md:hidden"
                   aria-label="Open navigation menu"
                 >
                   <Menu className="h-5 w-5" />
@@ -143,22 +145,22 @@ export default function Home() {
         </header>
 
         <div className="relative flex flex-1 flex-col lg:min-h-0 lg:flex-row lg:overflow-hidden">
-          <div className="relative min-h-[44svh] w-full overflow-hidden sm:min-h-[32rem] lg:min-h-0 lg:w-3/5">
+          <div className="relative h-[58svh] min-h-[28rem] max-h-[36rem] w-full overflow-hidden sm:min-h-[32rem] sm:max-h-none lg:h-auto lg:min-h-0 lg:w-3/5">
             <div className="absolute inset-0 opacity-5">
               <div className="absolute left-20 top-20 h-64 w-64 animate-pulse rounded-full bg-gradient-to-br from-neutral-400 to-neutral-600 blur-3xl" />
               <div className="absolute bottom-20 right-20 h-96 w-96 animate-pulse rounded-full bg-gradient-to-br from-neutral-300 to-neutral-500 blur-3xl delay-1000" />
             </div>
 
-            <div className="absolute left-4 top-4 z-10 sm:left-6 sm:top-6 lg:left-8 lg:top-8">
-              <div className="rounded-2xl border border-neutral-200/50 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-md sm:px-6">
+            <div className="absolute left-3 top-3 z-10 sm:left-6 sm:top-6 lg:left-8 lg:top-8">
+              <div className="max-w-[11rem] rounded-2xl border border-neutral-200/50 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-md sm:max-w-none sm:px-6">
                 <p className="mb-1 text-xs uppercase tracking-wider text-neutral-500">Live Preview</p>
                 <p className="text-sm font-light text-neutral-800">360 Interactive View</p>
               </div>
             </div>
 
-            <div className="absolute bottom-4 left-4 z-10 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8">
+            <div className="absolute bottom-3 left-3 right-3 z-10 sm:bottom-6 sm:left-6 sm:right-auto lg:bottom-8 lg:left-8">
               <div className="rounded-xl border border-neutral-200/50 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-md sm:px-5">
-                <p className="text-xs font-light text-neutral-600">
+                <p className="text-xs font-light text-neutral-600 sm:text-[13px]">
                   <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
                   Drag to rotate / Scroll to zoom
                 </p>
@@ -172,12 +174,12 @@ export default function Home() {
             <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 bg-gradient-to-bl from-neutral-100 via-transparent to-transparent opacity-50 sm:h-80 sm:w-80 lg:h-96 lg:w-96" />
 
             <div className="relative h-full overflow-y-auto">
-              <div className="px-4 pb-6 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+              <div className="px-4 pb-6 pt-5 sm:px-6 sm:pt-8 lg:px-8">
                 <div className="mb-6 animate-fade-in sm:mb-8">
-                  <h2 className="mb-2 text-2xl font-light tracking-wide text-neutral-900 sm:text-3xl">
+                  <h2 className="mb-2 text-[2rem] font-light tracking-wide text-neutral-900 sm:text-3xl">
                     Craft Your <span className="font-semibold">Masterpiece</span>
                   </h2>
-                  <p className="max-w-xl text-sm font-light leading-relaxed text-neutral-600">
+                  <p className="max-w-xl text-base font-light leading-relaxed text-neutral-600 sm:text-sm">
                     Every detail matters. Create a ring that tells your unique story with our intuitive designer.
                   </p>
                 </div>
